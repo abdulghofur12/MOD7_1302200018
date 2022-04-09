@@ -17,7 +17,7 @@ namespace MOD7_1302200018
         public BankTransferConfig conf;
         public string path = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.FullName;
         public string fileconfigName = "bank_transfer_config.json";
-       
+
 
         public Config()
         {
@@ -32,11 +32,12 @@ namespace MOD7_1302200018
             }
         }
 
-        private Config ReadConfigFile() 
+        private Config ReadConfigFile()
         {
-            string jsonstringFromFile=File.ReadAllText(path+ "/" + fileconfigName);
+            string jsonstringFromFile = File.ReadAllText(path + "/" + fileconfigName);
             conf = JsonSerializer.Deserialize<BankTransferConfig>(jsonstringFromFile);
-            
+            return conf;
+
         }
         private void WriteNewConfigFile()
         {
@@ -54,21 +55,20 @@ namespace MOD7_1302200018
 
         private void setDefault()
         {
-            BankTransferConfig obj textawal = new BankTransferConfig(
-                "“Please insert the amount of money to transfe:", 
-                "“Masukkan jumlah uang yang akan di-transfe");
-            conf = new BankTransferConfig(obj textawal);
-    }
+            en = "Please insert the amount of money to transfer:";
+            id = "“Masukkan jumlah uang yang akan di-transfe";
+        }
 
-    class BankTransferConfig
-    {
-        public string en { get; set;}
-        public string id { get; set;}
-
-        public BankTransferConfig(string en,string id)
+        class BankTransferConfig
         {
-            this.en = en;
-            this.id = id;
+            public string en { get; set; }
+            public string id { get; set; }
+
+            public BankTransferConfig(string en, string id)
+            {
+                this.en = en;
+                this.id = id;
+            }
         }
     }
 }
